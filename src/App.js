@@ -7,10 +7,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
+import {Read} from './components/read';
+import { Create } from './components/create';
 import {BrowserRouter as Router,
 Routes,
 Route
 } from 'react-router-dom';
+import { Books } from './components/books';
 
 class App extends React.Component {
   render(){
@@ -30,8 +33,9 @@ class App extends React.Component {
       </Navbar>
       <Routes>
       <Route path='/' element={<Content></Content>}></Route>
-      <Route path='/read' element={<Header></Header>}></Route>
-      <Route path='/create' element={<Footer></Footer>}></Route>
+      <Route path='/read' element={<Read></Read>}></Route>
+      <Route path='/create' element={<Create></Create>}></Route>
+
       </Routes>
       {/*</Routes><Header></Header>
       <Content></Content>
