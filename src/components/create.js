@@ -1,52 +1,69 @@
 import React from "react";
+import axios from "axios";
 
 export class Create extends React.Component {
 
-    constructor() {
+    constructor(){
         super();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChangeBookTitle = this.onChangeBookTitle.bind(this);
         this.onChangeBookCover = this.onChangeBookCover.bind(this);
         this.onChangeBookAuthor = this.onChangeBookAuthor.bind(this);
+        
 
         this.state = {
-            title: '',
-            cover: '',
-            author: ''
+            title:'',
+            cover:'',
+            author:''
         }
     }
-
-    handleSubmit(e) {
+    handleSubmit(e){
         e.preventDefault();
-        console.log(`${this.state.title}, 
-        ${this.state.cover}, 
-        ${this.state.author}`)
-    }
-    onChangeBookTitle(e) {
+        console.log(`Button clicked 
+        ${this.state.title},
+        ${this.state.cover},
+        ${this.state.author}`);
+
+        //post to the server
+        const book={
+            title:this.state.title,
+            cover:this.state.cover,
+            author:this.state.author
+        }
+
+        //book to be send up tp the server
+        axios.post ('http://localhost:4000/api/books',book)
+        .then()
+        .catch();
+
         this.setState({
-            title: e.target.value
-        })
-    }
-    onChangeBookCover(e) {
-        this.setState({
-            cover: e.target.value
-        })
-    }
-    onChangeBookAuthor(e) {
-        this.setState({
-            author: e.target.value
+            title:'',
+            cover:'',
+            author:''
         })
     }
 
+    onChangeBookTitle(e){
+        this.setState({
+            title:e.target.value
+        })
+    }
+    onChangeBookCover(e){
+        this.setState({
+            cover:e.target.value
+        })
+    }
+    onChangeBookAuthor(e){
+        this.setState({
+            author:e.target.value
+        })
+    }
 
     render() {
         return (
             <div>
-                <h3>
-                    hello from Component
-                </h3>
+                <h3>Hello from Create Component!</h3>
                 <form onSubmit={this.handleSubmit}>
-
                     <div className="form-group">
                         <label>Add Book Title: </label>
                         <input type="text"
@@ -57,7 +74,7 @@ export class Create extends React.Component {
                     </div>
 
                     <div className="form-group">
-                        <label>Add Book cover: </label>
+                        <label>Add Book Cover: </label>
                         <input type="text"
                             className="form-control"
                             value={this.state.cover}
@@ -66,7 +83,7 @@ export class Create extends React.Component {
                     </div>
 
                     <div className="form-group">
-                        <label>Add Book author: </label>
+                        <label>Add Author: </label>
                         <input type="text"
                             className="form-control"
                             value={this.state.author}
@@ -74,10 +91,9 @@ export class Create extends React.Component {
                         />
                     </div>
 
-
-                    <input type="submit" value="Add Book "></input>
+                    <input type="submit" value="Add Book" />
                 </form>
             </div>
-        )
+        );
     }
 }

@@ -3,29 +3,27 @@ import { Books } from "./books";
 import axios from "axios";
 
 export class Read extends React.Component{
-
-    componentDidMount(){
-        axios.get('https://jsonblob.com/api/jsonblob/1027219693823606784')
+    
+    componentDidMount() {
+        axios.get('http://localhost:4000/api/books')
         .then((response)=>{
-            this.setState({
-                books:response.data
-            })
+            this.setState({books:response.data.myBooks})
         })
         .catch((error)=>{
             console.log(error);
-        });
+        })
     }
 
     state = {
-        books:[]
+        books:[ ]
     }
-
+    
     render(){
         return(
-        <div>
-            <h3>hello from read Component.</h3>
-            <Books books={this.state.books}></Books>
-        </div>
-        )
+            <div>
+                <h3>Hello from my Read component!</h3>
+                <Books books={this.state.books}></Books>
+            </div>
+        );
     }
 }
